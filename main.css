@@ -1,0 +1,169 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0a1f3c;
+  color: white;
+  padding: 20px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav a {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+.donate-btn {
+  background-color: #3a8df4;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.hero {
+  margin: 40px 0;
+}
+.hero h1 {
+  font-size: 48px;
+  font-weight: bold;
+}
+.hero p {
+  margin: 20px 0;
+  max-width: 600px;
+}
+.hero button {
+  background-color: #3a8df4;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.section {
+  margin: 40px 0;
+}
+.latest-news {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.news-card {
+  background-color: #112a49;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 10px;
+}
+.news-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+.news-card h4 {
+  margin-top: 10px;
+  color: #3a8df4;
+}
+.side-section {
+  background-color: #112a49;
+  border-radius: 8px;
+  padding: 20px;
+}
+.side-section h3 {
+  margin-bottom: 10px;
+}
+.side-section a {
+  color: #3a8df4;
+  text-decoration: none;
+}
+footer {
+  margin-top: 40px;
+  text-align: center;
+  font-weight: bold;
+}
+.logo {
+  height: 40px;
+  vertical-align: middle;
+}
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 8px;
+  color: #fff;
+  text-decoration: none;
+}
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+}
+.logo-link:visited,
+.logo-link:active,
+.logo-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: transparent;
+  min-width: 160px; /* Set a minimum width for alignment */
+  box-shadow: none;
+  z-index: 1;
+  border-radius: 0;
+  padding: 8px 0; /* Add vertical padding */
+  white-space: normal; /* Allow block layout for submenu */
+  text-align: left; /* Align text to the left */
+}
+
+.dropdown-content .dropdown-submenu {
+  display: block;
+  margin: 0;
+}
+
+.dropdown-content a,
+.dropdown-submenu > a {
+  color: #fff;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block; /* Stack items vertically */
+  font-weight: 500;
+  background: none;
+  margin: 0;
+}
+
+.submenu-content a {
+  display: block;
+  margin: 8px 0 8px 24px; /* Indent submenu items */
+  padding: 0 16px;
+  color: #fff;
+  text-decoration: none;
+  background: none;
+}
+
+.dropdown-content a:hover,
+.submenu-content a:hover {
+  background-color: #3a8df4;
+  color: #fff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

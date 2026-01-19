@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DNN — Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <style>
+    /* Improved readable, news-style typography + layout tweaks */
+    :root{
+      --bg: #0a1f3c;
+      --muted: #cfe7ff;
+      --accent: #3a8df4;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background-color: var(--bg);
+      color: #e9f4ff;
+      padding: 28px;
+      font-size: 18px;        /* base size larger for readability */
+      line-height: 1.65;      /* more comfortable reading */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    nav a {
+      margin: 0 12px;
+      color: #f2f9ff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;     /* clearer nav text */
+      letter-spacing: 0.2px;
+    }
+
+    .donate-btn {
+      background-color: var(--accent);
+      border: none;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    main.hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      min-height: calc(100vh - 160px);
+      text-align: center;
+    }
+
+    main.hero h1 {
+      font-size: clamp(32px, 6.5vw, 64px); /* big, responsive headline */
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin: 0;
+      color: #ffffff;
+      text-transform: uppercase;            /* news-style emphasis */
+    }
+
+    main.hero p {
+      margin: 6px 0 14px;
+      max-width: 880px;
+      font-size: clamp(16px, 2.2vw, 20px);
+      color: #dfeeff;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    /* TV frame (slightly larger for better content hierarchy) */
+    .tv {
+      width: 520px;
+      max-width: 92%;
+      height: 320px;
+      background: #071426;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.6), inset 0 2px 0 rgba(255,255,255,0.02);
+      border: 10px solid #0b1522;
+      position: relative;
+    }
+
+    .tv .screen {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, #071a2b 0%, #04111a 60%);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 0 40px rgba(0,60,120,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 14px;
+    }
+
+    /* loader bars kept subtle so logo/ticker read clearly */
+    .loader { display:flex; gap:10px; align-items:end; margin-bottom:10px; height:92px; }
+    .loader .bar { width:14px; background: linear-gradient(180deg,#a6d2ff,#3a8df4); border-radius:5px; animation: barPulse 1s infinite ease-in-out; }
+    .loader .bar.b1{height:34%} .loader .bar.b2{height:56%} .loader .bar.b3{height:74%} .loader .bar.b4{height:48%} .loader .bar.b5{height:66%}
+
+    @keyframes barPulse { 0%{transform:scaleY(.36);opacity:.6}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.36);opacity:.6} }
+
+    /* DNN logo on screen — larger and higher for prominence */
+    .screen-logo {
+      position: absolute;
+      top: 36%;                 /* raised */
+      left: 50%;
+      width: 260px;             /* bigger for emphasis */
+      max-width: 58%;
+      transform: translate(-50%, -60%);
+      opacity: 0.95;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 12px 36px rgba(58,141,244,0.22));
+      animation: logoPulse 3.2s ease-in-out infinite;
+      z-index: 4;
+    }
+
+    @keyframes logoPulse {
+      0%{opacity:0;transform:translate(-50%,-66%) scale(.9)}
+      30%{opacity:.9;transform:translate(-50%,-60%) scale(1)}
+      70%{opacity:1;transform:translate(-50%,-56%) scale(1.03)}
+      100%{opacity:.95;transform:translate(-50%,-60%) scale(1)}
+    }
+
+    /* ticker (headline strip) - clearer, bolder */
+    .ticker-wrap{ width:100%; overflow:hidden; border-top:1px solid rgba(255,255,255,0.04); position:absolute; bottom:0; left:0; }
+    .ticker {
+      display:inline-block; white-space:nowrap; padding:12px 14px; color:#e6f6ff;
+      font-weight:800; font-size:16px; letter-spacing:0.4px;
+      animation: tickerMove 14s linear infinite;
+    }
+    .ticker span{ margin-right:56px; color:#f7fbff; }
+
+    @keyframes tickerMove { 0%{ transform:translateX(0%) } 100%{ transform:translateX(-50%) } }
+
+    .flicker{ position:absolute; inset:0; pointer-events:none; background-image: linear-gradient(transparent 60%, rgba(255,255,255,0.01)), repeating-linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px); mix-blend-mode:screen; animation:flick 3s infinite; border-radius:8px }
+    @keyframes flick{0%{opacity:.05}50%{opacity:.12}100%{opacity:.05}}
+
+    /* subscription UI */
+    #subscribe input[type="email"] { padding:12px 14px; border-radius:8px; border: none; max-width:360px; font-size:16px; }
+    #subscribe button { font-size:15px; padding:10px 16px; }
+
+    footer { margin-top: 28px; color:#cfe8ff; font-weight:600; text-align:center; }
+
+    /* responsive */
+    @media (max-width:760px){
+      .tv { height: 300px; width: 92%; }
+      .screen-logo { width: 200px; top: 35%; transform: translate(-50%, -60%); }
+      main.hero h1 { font-size: clamp(28px, 8vw, 48px); }
+    }
+    @media (max-width:420px){
+      body { padding: 16px; font-size:16px; }
+      .tv { height: 220px; }
+      .screen-logo { width: 140px; top: 34%; transform: translate(-50%, -58%); }
+      .loader { height:66px; gap:8px; }
+      .ticker { font-size:14px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="logo-link" role="img" aria-label="DNN logo">
+        <img src="images/DNN LOGO.png" alt="DNN Logo" class="logo" />
+        <span class="logo-text">DNN</span>
+      </div>
+    </div>
+    <!-- nav buttons removed -->
+  </header>
+
+  <main class="hero" role="main" aria-labelledby="coming-title">
+    <h1 id="coming-title">Coming Soon !</h1>
+    <p>The Disabled News Network (DNN) is dedicated to providing accurate and timely news coverage that impacts the disability community. Our mission is to empower individuals with disabilities by delivering essential information, fostering community engagement, and promoting awareness.
+    <div class="tv" role="img" aria-label="TV preview showing loading news">
+      <div class="screen">
+        <!-- DNN logo on the TV screen -->
+        <img src="images/DNN LOGO.png" alt="DNN on screen" class="screen-logo" />
+
+        <div class="loader" aria-hidden="true">
+          <div class="bar b1"></div>
+          <div class="bar b2"></div>
+          <div class="bar b3"></div>
+          <div class="bar b4"></div>
+          <div class="bar b5"></div>
+        </div>
+
+        <div class="flicker" aria-hidden="true"></div>
+
+        <div class="ticker-wrap" aria-hidden="false">
+          <div class="ticker" aria-hidden="false">
+            <span>Loading: All things Disability News, Accessibility, Disabled Youth, Stories untold...</span>
+            <span>Loading: All things Disability News, Accessibility, Disabled Youth, Stories untold...</span>
+
+        
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form id="subscribe" action="https://formspree.io/f/meeeawvp" method="POST" aria-label="Subscribe for updates" style="margin-top:8px;">
+      <input id="email" name="email" type="email" placeholder="Enter your email" required
+             style="padding:10px 12px;border-radius:8px;border:none;max-width:260px;" />
+      <input type="hidden" name="_subject" value="New launch signup" />
+      <input type="hidden" name="_language" value="en" />
+      <button type="submit" class="donate-btn" style="margin-left:8px;">Subscribe</button>
+    </form>
+
+    <div id="subscribe-msg" aria-live="polite" style="margin-top:8px;color:#bfe8c6;"></div>
+
+    <script>
+      // replace FORM_ID in the form action with your Formspree ID after creating the form
+      const form = document.getElementById('subscribe');
+      const msgEl = document.getElementById('subscribe-msg');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        msgEl.textContent = '';
+        const url = form.action;
+        const formData = new FormData(form);
+        try {
+          const res = await fetch(url, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            msgEl.style.color = '#bfe8c6';
+            msgEl.textContent = 'Thanks — we will notify you.';
+            form.reset();
+          } else {
+            const data = await res.json().catch(()=>null);
+            msgEl.style.color = '#f8d7da';
+            msgEl.textContent = data && data.error ? data.error : 'Signup failed. Try again later.';
+          }
+        } catch (err) {
+          msgEl.style.color = '#f8d7da';
+          msgEl.textContent = 'Unable to contact service. Try again later.';
+          console.error(err);
+        }
+      });
+    </script>
+  </main>
+
+  <footer>
+    2025 Disabled News Network. All rights reserved.
+  </footer>
+</body>
+</html>
