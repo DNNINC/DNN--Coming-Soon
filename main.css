@@ -168,3 +168,28 @@ footer {
   display: block;
 }
 
+/* ===== Header Logo Fix ===== */
+
+header {
+  min-height: 64px;              /* keeps header from growing */
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  height: 42px;                  /* ideal newsroom size */
+  width: auto;                   /* preserve aspect ratio */
+  max-width: 160px;              /* safety cap */
+  display: block;
+}
+
+.logo-text {
+  font-size: 18px;               /* reduce visual dominance */
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
