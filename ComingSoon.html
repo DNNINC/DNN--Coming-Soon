@@ -118,8 +118,8 @@
 
     @keyframes barPulse { 0%{transform:scaleY(.36);opacity:.6}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.36);opacity:.6} }
 
-    /* DNN logo on screen — larger and higher for prominence */
-    .screen-logo {
+    /* DNN  on screen — larger and higher for prominence */
+    .screen- {
       position: absolute;
       top: 36%;                 /* raised */
       left: 50%;
@@ -130,11 +130,11 @@
       pointer-events: none;
       mix-blend-mode: screen;
       filter: drop-shadow(0 12px 36px rgba(58,141,244,0.22));
-      animation: logoPulse 3.2s ease-in-out infinite;
+      animation: Pulse 3.2s ease-in-out infinite;
       z-index: 4;
     }
 
-    @keyframes logoPulse {
+    @keyframes Pulse {
       0%{opacity:0;transform:translate(-50%,-66%) scale(.9)}
       30%{opacity:.9;transform:translate(-50%,-60%) scale(1)}
       70%{opacity:1;transform:translate(-50%,-56%) scale(1.03)}
@@ -164,13 +164,13 @@
     /* responsive */
     @media (max-width:760px){
       .tv { height: 300px; width: 92%; }
-      .screen-logo { width: 200px; top: 35%; transform: translate(-50%, -60%); }
+      .screen- { width: 200px; top: 35%; transform: translate(-50%, -60%); }
       main.hero h1 { font-size: clamp(28px, 8vw, 48px); }
     }
     @media (max-width:420px){
       body { padding: 16px; font-size:16px; }
       .tv { height: 220px; }
-      .screen-logo { width: 140px; top: 34%; transform: translate(-50%, -58%); }
+      .screen- { width: 140px; top: 34%; transform: translate(-50%, -58%); }
       .loader { height:66px; gap:8px; }
       .ticker { font-size:14px; }
     }
@@ -180,7 +180,7 @@
   <header>
     <div>
       <div class="logo-link" role="img" aria-label="DNN logo">
-        <img src="images/DNN LOGO.png" alt="DNN Logo" class="logo" />
+        <img src="DNN LOGO.png" alt="DNN Logo" class="logo" />
         <span class="logo-text">DNN</span>
       </div>
     </div>
@@ -193,7 +193,7 @@
     <div class="tv" role="img" aria-label="TV preview showing loading news">
       <div class="screen">
         <!-- DNN logo on the TV screen -->
-        <img src="images/DNN LOGO.png" alt="DNN on screen" class="screen-logo" />
+        <img src="DNN LOGO.png" alt="DNN on screen" class="screen-logo" />
 
         <div class="loader" aria-hidden="true">
           <div class="bar b1"></div>
@@ -263,4 +263,5 @@
     2025 Disabled News Network. All rights reserved.
   </footer>
 </body>
+
 </html>
